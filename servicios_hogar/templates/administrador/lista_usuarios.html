@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Lista de Usuarios</h2>
+
+            <div class="mb-3">
+                <a href="{% url 'servicios:crear_usuario' %}" class="btn btn-success me-2">Crear Usuario</a>
+                <a href="{% url 'servicios:crear_tecnico' %}" class="btn btn-info">Crear Técnico</a>
+            </div>
+
+            <div class="mb-3">
+                <form method="get" class="form-inline">
+                    <label class="me-2" for="rol">Filtrar por Rol:</label>
+                    <select class="form-select me-2" id="rol" name="rol">
+                        <option value="">Todos los Roles</option>
+                        <option value="administrador" {% if rol_seleccionado == 'administrador' %}selected{% endif %}>Administradores</option>
+                        <option value="tecnico" {% if rol_seleccionado == 'tecnico' %}selected{% endif %}>Técnicos</option>
+                        <option value="cliente" {% if rol_seleccionado == 'cliente' %}selected{% endif %}>Clientes</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                    <a href="{% url 'servicios:lista_usuarios' %}" class="btn btn-secondary ms-2">Limpiar Filtro</a>
+                </form>
+            </div>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre de Usuario</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                        <th>Es Administrador</th>
+                        <th>Grupos</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for usuario in usuarios %}
+                        <tr>
+                            <td>{{ usuario.id }}</td>
+                            <td>{{ usuario.username }}</td>
+                            <td>{{ usuario.first_name|default:"-" }}</td>
+                            <td>{{ usuario.last_name|default:"-" }}</td>
+                            <td>{{ usuario.email|default:"-" }}</td>
+                            <td>{% if usuario.is_staff %}<span class="badge bg-success">Sí</span>{% else %}<span class="badge bg-secondary">No</span>{% endif %}</td>
+                            <td>
+                                {% for grupo in usuario.groups.all %}
+                                    <span class="badge bg-info">{{ grupo.name }}</span>
+                                {% empty %}
+                                    <span class="badge bg-light text-muted">Ninguno</span>
+                                {% endfor %}
+                            </td>
+                            <td>
+                                {% if usuario.groups.filter(name='Tecnicos').exists %}
+                                    <a href="{% url 'servicios:editar_tecnico' usuario.id %}" class="btn btn-sm btn-warning me-1">Editar</a>
+                                {% else %}
+                                    <a href="{% url 'servicios:editar_usuario' usuario.id %}" class="btn btn-sm btn-warning me-1">Editar</a>
+                                {% endif %}
+                                <form method="post" action="{% url 'servicios:eliminar_usuario' usuario.id %}" class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar a {{ usuario.username }}?')">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="8" class="text-center">No hay usuarios registrados.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

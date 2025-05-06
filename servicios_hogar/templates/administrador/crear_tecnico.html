@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Crear Nuevo Técnico</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        {% include 'administrador/form_usuario.html' %}
+                        {{ form.especialidades.label_tag }}
+                        {{ form.especialidades }}
+                        {{ form.especialidades.errors }}
+                        <div class="mb-3">
+                            {{ form.experiencia.label_tag }}
+                            {{ form.experiencia }}
+                            {{ form.experiencia.errors }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.descripcion.label_tag }}
+                            {{ form.descripcion }}
+                            {{ form.descripcion.errors }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Crear Técnico</button>
+                        <a href="{% url 'servicios:lista_usuarios' %}" class="btn btn-secondary ms-2">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

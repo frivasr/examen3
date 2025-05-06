@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Tipos de Servicio</h2>
+    <a href="{% url 'servicios:crear_tipo_servicio' %}" class="btn btn-primary mb-3">Crear Nuevo Tipo de Servicio</a>
+    {% if tipos_servicio %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tipo in tipos_servicio %}
+                    <tr>
+                        <td>{{ tipo.nombre }}</td>
+                        <td>{{ tipo.descripcion }}</td>
+                        <td>
+                            <a href="{% url 'servicios:editar_tipo_servicio' tipo.id %}" class="btn btn-sm btn-warning">Editar</a>
+                            <a href="{% url 'servicios:eliminar_tipo_servicio' tipo.id %}" class="btn btn-sm btn-danger ms-2">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No hay tipos de servicio registrados.</p>
+    {% endif %}
+</div>
+{% endblock %}

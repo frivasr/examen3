@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Detalle del Técnico: {{ tecnico.first_name }} {{ tecnico.last_name }}</h2>
+                </div>
+                <div class="card-body">
+                    <p><strong>Nombre de Usuario:</strong> {{ tecnico.username }}</p>
+                    <p><strong>Nombre:</strong> {{ tecnico.first_name }}</p>
+                    <p><strong>Apellido:</strong> {{ tecnico.last_name }}</p>
+                    <p><strong>Email:</strong> {{ tecnico.email }}</p>
+
+                    {% if perfil %}
+                        <div class="mt-3">
+                            <h5>Información del Perfil Técnico:</h5>
+                            <p><strong>Especialidades:</strong> {{ perfil.especialidades|default:"-" }}</p>
+                            <p><strong>Experiencia:</strong> {{ perfil.experiencia|default:"-"|linebreaksbr }}</p>
+                            <p><strong>Descripción:</strong> {{ perfil.descripcion|default:"-"|linebreaksbr }}</p>
+                            </div>
+                    {% else %}
+                        <p class="text-muted mt-3">Este técnico no tiene información de perfil adicional.</p>
+                    {% endif %}
+
+                    <div class="mt-3">
+                        <a href="{% url 'servicios:lista_tecnicos' %}" class="btn btn-secondary">Volver a Lista de Técnicos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

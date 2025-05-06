@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Mis Notificaciones</h2>
+            {% if notificaciones %}
+                <ul class="list-group">
+                    {% for notificacion in notificaciones %}
+                        <li class="list-group-item {% if not notificacion.leida %}list-group-item-info{% endif %} d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">{{ notificacion.mensaje }}</div>
+                                <small class="text-muted">{{ notificacion.fecha_creacion|date:"d/m/Y H:i" }}</small>
+                                {% if notificacion.tipo == 'nueva_solicitud' and notificacion.objeto_id %}
+                                    <a href="{% url 'servicios:detalle_solicitud' notificacion.objeto_id %}" class="btn btn-sm btn-outline-primary mt-2">Ver Solicitud</a>
+                                {% elif notificacion.tipo == 'asignacion' and notificacion.objeto_id %}
+                                    <a href="{% url 'servicios:detalle_asignacion' notificacion.objeto_id %}" class="btn btn-sm btn-outline-primary mt-2">Ver Asignación</a>
+                                {% endif %}
+                            </div>
+                            {% if not notificacion.leida %}
+                                <form method="post" action="{% url 'servicios:marcar_leida' notificacion.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-sm btn-outline-secondary">Marcar como Leída</button>
+                                </form>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No tienes ninguna notificación.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

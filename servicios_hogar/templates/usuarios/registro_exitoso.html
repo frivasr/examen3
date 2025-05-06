@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Registro Exitoso{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow p-4 rounded text-center">
+                <h2 class="mb-4">¡Registro Exitoso!</h2>
+                <p class="lead">Tu cuenta ha sido creada exitosamente.</p>
+                <p>Ahora puedes <a href="{% url 'usuarios:login' %}">iniciar sesión</a>.</p>
+                {% if messages %}
+                    <ul class="messages mt-3">
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

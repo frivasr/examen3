@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Solicitud</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Crear Solicitud de Servicio</h1>
+    <form id="crear-solicitud-form">
+        <label for="tipo_servicio">Tipo de Servicio:</label>
+        <select id="tipo_servicio" name="tipo_servicio">
+            <option value="1">Plomería</option>
+            <option value="2">Electricidad</option>
+            </select><br>
+
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" name="descripcion"></textarea><br>
+
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" name="direccion"><br>
+
+        <label for="fecha_preferida">Fecha Preferida:</label>
+        <input type="date" id="fecha_preferida" name="fecha_preferida"><br>
+
+        <button type="submit">Crear Solicitud</button>
+    </form>
+
+    <div id="mensaje"></div>
+    <a href="index.html">Volver al Inicio de Sesión</a>
+    <script src="script.js"></script>
+</body>
+</html>

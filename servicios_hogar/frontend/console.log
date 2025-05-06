@@ -1,0 +1,8 @@
+Agrega un console.log para ver los datos que se están enviando en la solicitud POST:
+
+body: JSON.stringify({
+    tipo_servicio: tipoServicio,
+    descripcion: descripcion,
+    direccion: direccion,
+    fecha_preferida: fechaPreferida
+})

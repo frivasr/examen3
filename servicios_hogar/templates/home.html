@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Bienvenido a Servicios del Hogar{% endblock %}
+
+{% block content %}
+<div class="hero bg-light py-5">
+    <div class="container text-center">
+        <h1 class="display-4 mb-4">Encuentra los mejores profesionales para tu hogar</h1>
+        <p class="lead mb-5">Aquí encontrarás una amplia variedad de servicios para el cuidado y mejora de tu casa. ¡Desde reparaciones hasta limpiezas profundas, tenemos lo que necesitas!</p>
+        <a href="{% url 'servicios:lista_servicios' %}" class="btn btn-primary btn-lg">Ver Servicios Disponibles</a>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="mb-4 text-center">Nuestros Servicios Destacados</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow rounded h-100">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhjoONCQd-ID7IM0qkFcF_-GQx46tECoAaAQ&s" alt="Plomería" class="card-img-top" style="height: 150px; object-fit: cover;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Plomería</h5>
+                            <p class="card-text small">Soluciones rápidas y eficientes para cualquier problema de fontanería.</p>
+                            <a href="#" class="btn btn-primary btn-sm mt-3">Ver Servicios</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow rounded h-100">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNxEbTCA-5Yk3VfCmA54tRQq6OFMjObhLEPQ&s" alt="Electricidad" class="card-img-top" style="height: 150px; object-fit: cover;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Electricidad</h5>
+                            <p class="card-text small">Instalaciones, reparaciones y mantenimiento eléctrico seguro y profesional.</p>
+                            <a href="#" class="btn btn-primary btn-sm mt-3">Ver Servicios</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow rounded h-100">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4RjJmYWTPHUyVXVAexNCDgtXHWrbstJDeGw&s" alt="Limpieza" class="card-img-top" style="height: 150px; object-fit: cover;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Limpieza</h5>
+                            <p class="card-text small">Servicios de limpieza general y profunda para un hogar impecable.</p>
+                            <a href="#" class="btn btn-primary btn-sm mt-3">Ver Servicios</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center mt-5"><a href="{% url 'servicios:lista_servicios' %}" class="btn btn-info btn-sm">Explorar todos los servicios</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{% static 'css/estilos_pagina_principal.css' %}">
+{% endblock %}

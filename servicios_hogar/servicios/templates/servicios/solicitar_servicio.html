@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg p-4 rounded">
+        <h2 class="mb-4">Solicitar Nuevo Servicio</h2>
+        <form method="post" action="{% url 'servicios:solicitar_servicio' %}">
+            {% csrf_token %}
+            <div class="row mb-3">
+                <label for="{{ form.tipo_servicio.id_for_label }}" class="col-md-3 col-form-label">Tipo de Servicio</label>
+                <div class="col-md-9">
+                    {{ form.tipo_servicio }}
+                    {% if form.tipo_servicio.errors %}
+                        <div class="alert alert-danger mt-2">{{ form.tipo_servicio.errors }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="{{ form.descripcion.id_for_label }}" class="col-md-3 col-form-label">Descripción del Servicio</label>
+                <div class="col-md-9">
+                    {{ form.descripcion }}
+                    <div class="form-text">Describe detalladamente el servicio que necesitas.</div>
+                    {% if form.descripcion.errors %}
+                        <div class="alert alert-danger mt-2">{{ form.descripcion.errors }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="{{ form.direccion.id_for_label }}" class="col-md-3 col-form-label">Dirección</label>
+                <div class="col-md-9">
+                    {{ form.direccion }}
+                    {% if form.direccion.errors %}
+                        <div class="alert alert-danger mt-2">{{ form.direccion.errors }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="{{ form.fecha_preferida.id_for_label }}" class="col-md-3 col-form-label">Fecha Preferida</label>
+                <div class="col-md-9">
+                    <div class="input-group">
+                        {{ form.fecha_preferida }}
+                        <span class="input-group-text"><i class="bi bi-calendar"></i></span>
+                    </div>
+                    <div class="form-text">Indica la fecha en la que te gustaría que se realice el servicio (dd/mm/aaaa).</div>
+                    {% if form.fecha_preferida.errors %}
+                        <div class="alert alert-danger mt-2">{{ form.fecha_preferida.errors }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary btn-lg">Solicitar Servicio</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

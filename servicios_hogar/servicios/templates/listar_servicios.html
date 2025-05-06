@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Nuestros Servicios</h2>
+            {% if tipos_servicio %}
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    {% for tipo in tipos_servicio %}
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ tipo.nombre }}</h5>
+                                    <p class="card-text">{{ tipo.descripcion }}</p>
+                                    <a href="#" class="btn btn-primary">Solicitar {{ tipo.nombre }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No hay servicios disponibles en este momento.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

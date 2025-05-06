@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Todas las Solicitudes de Servicio</h2>
+            {% if solicitudes %}
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tipo de Servicio</th>
+                            <th>Cliente</th>
+                            <th>Fecha Solicitud</th>
+                            <th>Fecha Preferida</th>
+                            <th>Dirección</th>
+                            <th>Estado</th>
+                            <th>Técnico Asignado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for solicitud in solicitudes %}
+                            <tr>
+                                <td>{{ solicitud.id }}</td>
+                                <td>{{ solicitud.tipo_servicio }}</td>
+                                <td>{{ solicitud.cliente.first_name }} {{ solicitud.cliente.last_name }} ({{ solicitud.cliente.username }})</td>
+                                <td>{{ solicitud.fecha_solicitud|date:"d/m/Y H:i" }}</td>
+                                <td>{{ solicitud.fecha_preferida|date:"d/m/Y" }}</td>
+                                <td>{{ solicitud.direccion }}</td>
+                                <td>{{ solicitud.estado }}</td>
+                                <td>
+                                    {% if solicitud.tecnico_asignado %}
+                                        {{ solicitud.tecnico_asignado.first_name }} {{ solicitud.tecnico_asignado.last_name }} ({{ solicitud.tecnico_asignado.username }})
+                                    {% else %}
+                                        Sin asignar
+                                    {% endif %}
+                                </td>
+                                <td><a href="{% url 'servicios:detalle_solicitud_admin' solicitud.id %}" class="btn btn-sm btn-info">Ver Detalles</a>
+                                    {% if not solicitud.tecnico_asignado %}
+                                        <a href="{% url 'servicios:asignar_tecnico' solicitud.id %}" class="btn btn-sm btn-warning ms-2">Asignar Técnico</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No hay solicitudes de servicio.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

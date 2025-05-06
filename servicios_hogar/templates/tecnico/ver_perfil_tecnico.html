@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Perfil de Técnico</h2>
+                </div>
+                <div class="card-body">
+                    {% if perfil %}
+                        <p><strong>Especialidades:</strong> {{ perfil.especialidades|default:"-" }}</p>
+                        <p><strong>Experiencia:</strong> {{ perfil.experiencia|default:"-"|linebreaksbr }}</p>
+                        <p><strong>Descripción:</strong> {{ perfil.descripcion|default:"-"|linebreaksbr }}</p>
+                        <a href="{% url 'servicios:editar_perfil_tecnico' %}" class="btn btn-primary">Editar Perfil</a>
+                    {% else %}
+                        <p>Aún no has creado tu perfil. <a href="{% url 'servicios:editar_perfil_tecnico' %}">Crear Perfil</a></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

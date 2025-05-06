@@ -1,0 +1,36 @@
+body {
+    font-family: sans-serif;
+}
+
+form {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, select, textarea {
+    width: 200px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 8px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.success {
+    color: green;
+}
+
+.error {
+    color: red;
+}

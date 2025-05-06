@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Mis Asignaciones de Servicio</h2>
+            {% if asignaciones %}
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID Solicitud</th>
+                            <th>Tipo de Servicio</th>
+                            <th>Cliente</th>
+                            <th>Fecha de Solicitud</th>
+                            <th>Fecha Preferida</th>
+                            <th>Dirección</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for asignacion in asignaciones %}
+                            <tr>
+                                <td>{{ asignacion.id }}</td>
+                                <td>{{ asignacion.tipo_servicio }}</td>
+                                <td>{{ asignacion.cliente.first_name }} {{ asignacion.cliente.last_name }} ({{ asignacion.cliente.username }})</td>
+                                <td>{{ asignacion.fecha_solicitud|date:"d/m/Y H:i" }}</td>
+                                <td>{{ asignacion.fecha_preferida|date:"d/m/Y" }}</td>
+                                <td>{{ asignacion.direccion }}</td>
+                                <td>{{ asignacion.estado }}</td>
+                                <td><a href="{% url 'servicios:detalle_asignacion' asignacion.id %}" class="btn btn-sm btn-info">Ver Detalles</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No tienes ninguna asignación de servicio.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

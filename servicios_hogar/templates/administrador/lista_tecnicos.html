@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Lista de Técnicos</h2>
+            {% if tecnicos %}
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre de Usuario</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Especialidades</th>
+                            <th>Experiencia</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for tecnico in tecnicos %}
+                            <tr>
+                                <td>{{ tecnico.id }}</td>
+                                <td>{{ tecnico.username }}</td>
+                                <td>{{ tecnico.first_name }}</td>
+                                <td>{{ tecnico.last_name }}</td>
+                                <td>{{ tecnico.perfil_tecnico.especialidades|default:"-" }}</td>
+                                <td>{{ tecnico.perfil_tecnico.experiencia|truncatechars:50|default:"-" }}</td>
+                                <td>
+                                    <a href="{% url 'servicios:detalle_tecnico' tecnico.id %}" class="btn btn-sm btn-info">Ver Perfil</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No hay técnicos registrados en el sistema.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
